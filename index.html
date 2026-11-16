@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVOLUTA | Tu Sistema de Crecimiento Personal</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        evoluta: {
+                            abyss: '#060D17',
+                            deep: '#0B1626',
+                            slate: '#101F33',
+                            card: '#13243B',
+                            cyan: '#00D2FF',
+                            cobalt: '#0066FF',
+                            amber: '#F5A623',
+                            muted: '#94A3B8',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Montserrat', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'cyan-glow': '0 0 25px rgba(0, 210, 255, 0.35)',
+                        'cyan-glow-lg': '0 0 40px rgba(0, 210, 255, 0.5)',
+                        'amber-glow': '0 0 25px rgba(245, 166, 35, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #060D17;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .tech-glass {
+            background: rgba(16, 31, 51, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 210, 255, 0.18);
+        }
+
+        .tech-glass-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tech-glass-hover:hover {
+            border-color: rgba(0, 210, 255, 0.55);
+            box-shadow: 0 10px 35px -10px rgba(0, 210, 255, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .bg-tech-grid {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 210, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 210, 255, 0.04) 1px, transparent 1px);
+        }
+
+        .hero-atmosphere {
+            background: 
+                radial-gradient(circle at 18% 30%, rgba(0, 210, 255, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 82% 28%, rgba(245, 166, 35, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(0, 102, 255, 0.14) 0%, transparent 55%),
+                linear-gradient(180deg, #060D17 0%, #0B1626 65%, #060D17 100%);
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #FFFFFF 0%, #00D2FF 55%, #0066FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.7s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sliders IBS */
+        input[type="range"].evoluta-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #13243B;
+            border-radius: 999px;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        input[type="range"].evoluta-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00D2FF;
+            border: 3px solid #060D17;
+            box-shadow: 0 0 14px rgba(0, 210, 255, 0.9), 0 0 4px #FFFFFF;
+            cursor: grab;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        input[type="range"].evoluta-slider::-webkit-slider-thumb:hover,
+        input[type="range"].evoluta-slider:active::-webkit-slider-thumb {
+            transform: scale(1.18);
+            box-shadow: 0 0 22px rgba(0, 210, 255, 1), 0 0 6px #FFFFFF;
+            cursor: grabbing;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060D17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E3A5F;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00D2FF;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-evoluta-cyan selection:text-evoluta-abyss">
+
+    <!-- Definiciones SVG Globales -->
+    <svg width="0" height="0" class="hidden">
+        <defs>
+            <linearGradient id="evolutaCyanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#0055FF" />
+                <stop offset="50%" stop-color="#00D2FF" />
+                <stop offset="100%" stop-color="#9BEFFF" />
+            </linearGradient>
+            <linearGradient id="evolutaSilverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="60%" stop-color="#CBD5E1" />
+                <stop offset="100%" stop-color="#64748B" />
+            </linearGradient>
+            <filter id="cyanGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- =================================================================
+         1. NAVBAR FIJO
+    ================================================================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 tech-glass border-b border-evoluta-cyan/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3 group focus:outline-none" aria-label="EVOLUTA Inicio">
+                <svg class="w-10 h-10 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 64 64" fill="none">
+                    <path d="M44 43C39.5 49.5 31.5 52.5 23.5 50.5C14.5 48.2 9.5 39 11.8 30C13.5 23.2 19 18.2 25.5 16.8" stroke="url(#evolutaSilverGrad)" stroke-width="5.5" stroke-linecap="round"/>
+                    <path d="M13 35.5C21 35.5 33 32.5 46 17" stroke="url(#evolutaCyanGrad)" stroke-width="6" stroke-linecap="round" filter="url(#cyanGlowFilter)"/>
+                    <path d="M36 15.5H48.5V28" stroke="url(#evolutaCyanGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#cyanGlowFilter)"/>
+                    <circle cx="31" cy="14" r="4" fill="#FFFFFF" filter="url(#cyanGlowFilter)"/>
+                </svg>
+
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5 sm:gap-2 font-display font-bold text-lg sm:text-xl tracking-[0.22em] text-white">
+                        <span>EVOL<strong class="text-evoluta-cyan">Ü</strong>TA</span>
+                        <svg class="w-4 h-4 inline-block -ml-1" viewBox="0 0 22 20" fill="none">
+                            <path d="M2 18L11 2L20 18" stroke="url(#evolutaCyanGrad)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="text-[9px] sm:text-[10px] font-display tracking-[0.2em] text-evoluta-muted uppercase mt-0.5">
+                        Tu sistema de crecimiento personal
+                    </span>
+                </div>
+            </a>
+
+            <!-- Enlaces Desktop -->
+            <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-evoluta-muted">
+                <a href="#el-bloqueo" class="hover:text-evoluta-cyan transition-colors">El Bloqueo</a>
+                <a href="#diagnostico-ibs" class="hover:text-evoluta-cyan transition-colors">Diagnóstico IBS</a>
+                <a href="#el-sistema" class="hover:text-evoluta-cyan transition-colors">El Sistema</a>
+                <a href="#ecosistema" class="hover:text-evoluta-cyan transition-colors">Ecosistema</a>
+                <a href="#manifiesto" class="hover:text-evoluta-cyan transition-colors">Manifiesto</a>
+                <a href="#contacto" class="hover:text-evoluta-cyan transition-colors font-semibold text-white">Contacto</a>
+            </nav>
+
+            <div class="hidden sm:flex items-center">
+                <a href="#diagnostico-ibs" class="bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <span>Descubrir mi Bloqueo</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+
+            <button id="mobileMenuBtn" class="lg:hidden text-white hover:text-evoluta-cyan text-2xl p-2 focus:outline-none" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars" id="mobileMenuIcon"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden lg:hidden bg-evoluta-deep/95 backdrop-blur-xl border-b border-evoluta-cyan/20 px-6 py-6 space-y-4">
+            <a href="#el-bloqueo" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2 border-b border-white/5">El Bloqueo</a>
+            <a href="#diagnostico-ibs" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2 border-b border-white/5">Diagnóstico IBS</a>
+            <a href="#el-sistema" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2 border-b border-white/5">El Sistema (RED · IMÁN · IRIS)</a>
+            <a href="#ecosistema" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2 border-b border-white/5">Ecosistema</a>
+            <a href="#manifiesto" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2 border-b border-white/5">Manifiesto</a>
+            <a href="#contacto" class="mobile-link block text-white hover:text-evoluta-cyan font-medium py-2">Contacto</a>
+            <a href="#diagnostico-ibs" class="mobile-link block w-full text-center bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-bold py-3.5 rounded-full shadow-cyan-glow mt-4">
+                Descubrir mi Bloqueo
+            </a>
+        </div>
+    </header>
+
+    <!-- =================================================================
+         2. HERO SECTION
+    ================================================================== -->
+    <main class="pt-20">
+        <section class="relative min-h-[92vh] flex flex-col justify-between hero-atmosphere bg-tech-grid overflow-hidden">
+            
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-28 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-evoluta-cyan/10 rounded-full blur-[120px]"></div>
+                <div class="absolute top-24 right-[10%] w-64 h-64 bg-evoluta-amber/15 rounded-full blur-[100px]"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 sm:pt-24 sm:pb-16 text-center relative z-10 my-auto space-y-8">
+                
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full tech-glass border border-evoluta-cyan/35 text-evoluta-cyan font-display text-xs font-semibold tracking-[0.2em] uppercase">
+                    <span class="w-2 h-2 rounded-full bg-evoluta-cyan animate-ping"></span>
+                    Tu Sistema de Crecimiento Personal
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight leading-[1.1] uppercase">
+                    <span class="block text-white">No necesitas más motivación.</span>
+                    <span class="block mt-2">
+                        Necesitas un <span class="text-gradient-cyan">sistema.</span>
+                    </span>
+                </h1>
+
+                <p class="text-lg sm:text-2xl text-evoluta-muted max-w-3xl mx-auto font-light leading-relaxed">
+                    Sueñas. Te esfuerzas. Pero sigues estancado. 
+                    <span class="text-evoluta-amber font-medium block sm:inline mt-1 sm:mt-0">
+                        Tus objetivos son reales; el problema es el cómo.
+                    </span>
+                </p>
+
+                <div class="max-w-2xl mx-auto p-5 rounded-2xl tech-glass border border-white/10 text-sm sm:text-base text-slate-300">
+                    <p>
+                        Convertimos tus objetivos en un <strong class="text-white">proceso estructurado</strong> para avanzar. 
+                        Sin improvisar. Sin depender de rachas emocionales.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                    <a href="#diagnostico-ibs" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-bold text-sm sm:text-base tracking-wide shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Calibrar Diagnóstico IBS</span>
+                    </a>
+                    <a href="#contacto" class="w-full sm:w-auto px-8 py-4 rounded-full tech-glass border border-evoluta-cyan/40 hover:border-evoluta-cyan text-white font-display font-semibold text-sm sm:text-base tracking-wide transition-all flex items-center justify-center gap-2 hover:bg-evoluta-cyan/10">
+                        <span>Contactar al Equipo</span>
+                        <i class="fa-solid fa-envelope text-xs text-evoluta-cyan"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Barra Inferior de Pilares -->
+            <div class="relative z-10 border-t border-evoluta-cyan/20 bg-evoluta-abyss/85 backdrop-blur-md">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/5 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-xl flex-shrink-0">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-display font-bold text-xs sm:text-sm tracking-wider uppercase text-white">Objetivos Claros</h2>
+                                <p class="text-xs text-evoluta-muted mt-0.5">Con dirección definida.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/5 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-xl flex-shrink-0">
+                                <i class="fa-solid fa-gears"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-display font-bold text-xs sm:text-sm tracking-wider uppercase text-white">Proceso Estructurado</h2>
+                                <p class="text-xs text-evoluta-muted mt-0.5">Con método probado.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/5 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-xl flex-shrink-0">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-display font-bold text-xs sm:text-sm tracking-wider uppercase text-white">Seguimiento Real</h2>
+                                <p class="text-xs text-evoluta-muted mt-0.5">Con datos observables.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-2 rounded-xl hover:bg-white/5 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-xl flex-shrink-0">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-display font-bold text-xs sm:text-sm tracking-wider uppercase text-white">Resultados Tangibles</h2>
+                                <p class="text-xs text-evoluta-muted mt-0.5">Con tu mejor versión.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             3. EL CAMBIO DE PARADIGMA & LAS 5 ÁREAS DE VIDA
+        ================================================================== -->
+        <section id="el-bloqueo" class="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5 bg-evoluta-deep/50">
+            <div class="max-w-7xl mx-auto space-y-20">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-evoluta-amber font-display font-bold text-xs tracking-[0.25em] uppercase">
+                            Fase 02 · La Revelación
+                        </span>
+                        <h2 class="text-3xl sm:text-5xl font-display font-bold leading-tight">
+                            No estás roto. <br>
+                            <span class="text-evoluta-cyan">Tu sistema tiene fricción.</span>
+                        </h2>
+                        <p class="text-evoluta-muted text-base sm:text-lg leading-relaxed">
+                            "Sabes que puedes conseguir más. Tienes objetivos, tienes ganas... pero ¿por qué sigues sin avanzar como quieres?"
+                        </p>
+                        <div class="p-6 rounded-2xl tech-glass border-l-4 border-l-evoluta-amber space-y-2">
+                            <p class="font-display font-bold text-white text-sm uppercase tracking-wider">
+                                Nuevo Paradigma EVOLUTA
+                            </p>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                La procrastinación no es pereza ni falta de carácter. Es una <strong class="text-evoluta-amber">señal</strong> de un bloqueo no resuelto entre tu identidad, tus decisiones, tu plan o tu capacidad de adaptación.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-6 sm:p-8 rounded-3xl bg-evoluta-abyss/90 border border-white/10 space-y-5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-display font-bold uppercase tracking-widest text-slate-400">Antes · Improvisación</span>
+                                <i class="fa-solid fa-triangle-exclamation text-evoluta-amber/80"></i>
+                            </div>
+                            <ul class="space-y-3.5 text-sm text-slate-400">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-xmark text-red-400/80"></i> Confusión y dispersión</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-xmark text-red-400/80"></i> Parálisis por indecisión</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-xmark text-red-400/80"></i> Procrastinación recurrente</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-xmark text-red-400/80"></i> Dependencia de motivación</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-xmark text-red-400/80"></i> Errores interpretados como fracaso</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-6 sm:p-8 rounded-3xl tech-glass border border-evoluta-cyan/50 shadow-cyan-glow space-y-5 relative overflow-hidden">
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-evoluta-cyan/20 rounded-full blur-2xl"></div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-display font-bold uppercase tracking-widest text-evoluta-cyan">Después · Sistema EVOLUTA</span>
+                                <i class="fa-solid fa-bolt text-evoluta-cyan"></i>
+                            </div>
+                            <ul class="space-y-3.5 text-sm text-white font-medium">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-evoluta-cyan"></i> Claridad absoluta de Raíz</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-evoluta-cyan"></i> Decisión consciente y firme</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-evoluta-cyan"></i> Acción estructurada paso a paso</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-evoluta-cyan"></i> Medición objetiva con IRIS</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-evoluta-cyan"></i> Neuroajuste y evolución continua</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Las 5 Áreas que Realmente Importan -->
+                <div class="space-y-10 reveal">
+                    <div class="text-center max-w-2xl mx-auto space-y-3">
+                        <span class="text-xs font-display font-bold uppercase tracking-[0.25em] text-evoluta-cyan">
+                            Equilibrio Integral
+                        </span>
+                        <h3 class="text-2xl sm:text-4xl font-display font-bold text-white uppercase">
+                            Cada área de tu vida importa
+                        </h3>
+                        <p class="text-evoluta-muted text-sm sm:text-base">
+                            Un método integral para que avances sin sacrificar lo esencial. Selecciona un área para ver cómo actúa el sistema:
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="lifeAreasGrid">
+                        <button onclick="selectLifeArea('salud')" data-area="salud" class="area-btn active-area p-5 rounded-2xl tech-glass border border-evoluta-cyan shadow-cyan-glow text-center space-y-3 transition-all cursor-pointer">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-evoluta-cyan/20 text-evoluta-cyan flex items-center justify-center text-xl">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                            <span class="block font-display font-bold text-xs tracking-widest uppercase text-white">Salud</span>
+                        </button>
+
+                        <button onclick="selectLifeArea('mente')" data-area="mente" class="area-btn p-5 rounded-2xl tech-glass border border-white/10 hover:border-evoluta-cyan/50 text-center space-y-3 transition-all cursor-pointer">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-white/5 text-evoluta-cyan flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <span class="block font-display font-bold text-xs tracking-widest uppercase text-white">Mente</span>
+                        </button>
+
+                        <button onclick="selectLifeArea('profesion')" data-area="profesion" class="area-btn p-5 rounded-2xl tech-glass border border-white/10 hover:border-evoluta-cyan/50 text-center space-y-3 transition-all cursor-pointer">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-white/5 text-evoluta-cyan flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <span class="block font-display font-bold text-xs tracking-widest uppercase text-white">Profesión</span>
+                        </button>
+
+                        <button onclick="selectLifeArea('finanzas')" data-area="finanzas" class="area-btn p-5 rounded-2xl tech-glass border border-white/10 hover:border-evoluta-cyan/50 text-center space-y-3 transition-all cursor-pointer">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-white/5 text-evoluta-cyan flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+                            <span class="block font-display font-bold text-xs tracking-widest uppercase text-white">Finanzas</span>
+                        </button>
+
+                        <button onclick="selectLifeArea('bienestar')" data-area="bienestar" class="area-btn col-span-2 sm:col-span-1 p-5 rounded-2xl tech-glass border border-white/10 hover:border-evoluta-cyan/50 text-center space-y-3 transition-all cursor-pointer">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-white/5 text-evoluta-cyan flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <span class="block font-display font-bold text-xs tracking-widest uppercase text-white">Bienestar</span>
+                        </button>
+                    </div>
+
+                    <div id="lifeAreaDetail" class="p-6 sm:p-8 rounded-2xl tech-glass border border-evoluta-cyan/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                        <div class="space-y-1.5">
+                            <span id="areaTag" class="text-xs font-display font-bold uppercase tracking-widest text-evoluta-cyan">Área 01 · Energía Física y Vitalidad</span>
+                            <h4 id="areaTitle" class="text-xl font-display font-bold text-white">Salud: La base energética de tu sistema</h4>
+                            <p id="areaDesc" class="text-sm text-evoluta-muted max-w-3xl">
+                                Sin energía vital (IEV), cualquier plan colapsa. EVOLUTA diseña rutinas sostenibles de descanso, movimiento y nutrición integradas en tu agenda real, sin extremos insostenibles.
+                            </p>
+                        </div>
+                        <a href="#diagnostico-ibs" class="px-5 py-2.5 rounded-full bg-evoluta-cyan/15 border border-evoluta-cyan/40 text-evoluta-cyan text-xs font-display font-bold uppercase tracking-wider hover:bg-evoluta-cyan hover:text-evoluta-abyss transition-all flex-shrink-0">
+                            Evaluar esta área
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             4. DIAGNÓSTICO IBS (SLIDERS + MALLA IRIS + TARJETAS CON BOTÓN DE GUÍA GRATIS)
+        ================================================================== -->
+        <section id="diagnostico-ibs" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-tech-grid">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-4 reveal">
+                    <span class="inline-block px-3.5 py-1 rounded-full bg-evoluta-cyan/10 border border-evoluta-cyan/30 text-evoluta-cyan font-display text-xs font-bold tracking-[0.2em] uppercase">
+                        Fase 03 & 04 · Calibración Sistémica en Tiempo Real
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold text-white">
+                        Diagnóstico IBS & <span class="text-evoluta-cyan">Matriz IRIS</span>
+                    </h2>
+                    <p class="text-evoluta-muted max-w-3xl mx-auto text-sm sm:text-base">
+                        Desliza las <strong>6 barras de calibración</strong> de izquierda a derecha según el nivel de fricción actual en cada dimensión. Observa cómo se proyecta tu resultado en la malla de radar y recibe tu guía gratuita paso a paso.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- COLUMNA IZQUIERDA: SLIDERS (7 cols) -->
+                    <div class="lg:col-span-7 rounded-3xl tech-glass border border-evoluta-cyan/30 p-6 sm:p-8 shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-sliders text-evoluta-cyan text-lg"></i>
+                                <h3 class="font-display font-bold text-lg sm:text-xl text-white">
+                                    Calibra los 6 Indicadores IBS (1 al 10)
+                                </h3>
+                            </div>
+                            <button onclick="resetSliders()" class="text-xs font-display font-semibold text-evoluta-cyan hover:text-white transition-colors cursor-pointer">
+                                Restablecer
+                            </button>
+                        </div>
+
+                        <div id="slidersContainer" class="space-y-6">
+                            <!-- Se genera dinámicamente con JS -->
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <span class="text-xs text-evoluta-muted">
+                                <i class="fa-solid fa-circle-info text-evoluta-cyan mr-1.5"></i>
+                                Desliza a la derecha (10) cuando el bloqueo sea máximo.
+                            </span>
+                            <button onclick="revealFullReport()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-extrabold text-xs uppercase tracking-wider shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all cursor-pointer flex items-center justify-center gap-2">
+                                <span>Ver Informe Detallado (%)</span>
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA DERECHA: MALLA PENTAGONAL IRIS (5 cols) -->
+                    <div class="lg:col-span-5 space-y-6">
+                        
+                        <div class="rounded-3xl tech-glass border border-evoluta-cyan/30 p-6 sm:p-8 shadow-2xl flex flex-col items-center justify-between space-y-4">
+                            <span class="font-display font-bold text-xs tracking-[0.25em] uppercase text-evoluta-cyan">
+                                Mapa Sistémico IRIS · 5 Áreas Principales
+                            </span>
+
+                            <div class="w-full max-w-[330px] aspect-square flex items-center justify-center my-1">
+                                <svg id="irisRadarSvg" viewBox="0 0 360 330" class="w-full h-full overflow-visible">
+                                    <defs>
+                                        <linearGradient id="radarAreaFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#00D2FF" stop-opacity="0.34" />
+                                            <stop offset="100%" stop-color="#0066FF" stop-opacity="0.14" />
+                                        </linearGradient>
+                                        <filter id="nodeAmberGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                            <feGaussianBlur stdDeviation="2.5" result="blur" />
+                                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                        </filter>
+                                    </defs>
+                                    <g id="radarGridLayer"></g>
+                                    <g id="radarDataLayer"></g>
+                                    <g id="radarLabelsLayer"></g>
+                                </svg>
+                            </div>
+
+                            <div class="w-full pt-4 border-t border-white/10 flex items-end justify-between">
+                                <div>
+                                    <span class="block text-xs text-evoluta-muted">Índice de Salud Sistémica</span>
+                                    <span id="systemStatusLabel" class="font-display font-bold text-sm sm:text-base text-evoluta-amber">
+                                        Sistema en Expansión
+                                    </span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex items-baseline justify-end gap-1">
+                                        <span id="globalIndexScore" class="font-display font-extrabold text-3xl sm:text-4xl text-evoluta-cyan drop-shadow-[0_0_12px_rgba(0,210,255,0.5)]">6.5</span>
+                                        <span class="text-sm text-evoluta-muted font-medium">/10</span>
+                                    </div>
+                                    <span id="globalIbsPercentBadge" class="text-[11px] font-mono text-evoluta-muted">
+                                        Fricción IBS: 35%
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- =============================================================
+                     TARJETAS DE RESULTADOS CON BOTÓN DE GUÍA GRATIS EN "TU PRIMERA VICTORIA"
+                ============================================================== -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 reveal">
+                    
+                    <!-- Tarjeta Izquierda: ¿Por qué te bloquea exactamente? -->
+                    <div class="p-6 sm:p-8 rounded-3xl bg-evoluta-abyss/90 border border-white/10 space-y-4 shadow-xl flex flex-col justify-center">
+                        <div class="flex items-center gap-2.5 text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider">
+                            <i class="fa-solid fa-magnifying-glass-chart text-evoluta-cyan text-lg"></i>
+                            <span>¿Por qué te bloquea exactamente?</span>
+                        </div>
+                        <p id="resWhyText" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                            <!-- Dinámico -->
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta Derecha: Tu Primera Victoria (Acción Inmediata RED) + BOTÓN GUÍA GRATIS -->
+                    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-evoluta-cobalt/25 to-evoluta-cyan/15 border border-evoluta-cyan/50 space-y-5 shadow-cyan-glow flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-2.5 text-evoluta-amber font-display font-bold text-sm sm:text-base uppercase tracking-wider">
+                                <i class="fa-solid fa-trophy text-lg"></i>
+                                <span>Tu Primera Victoria (Acción Inmediata RED)</span>
+                            </div>
+                            <p id="resVictoryText" class="text-sm sm:text-base text-white font-medium leading-relaxed">
+                                <!-- Dinámico -->
+                            </p>
+                        </div>
+
+                        <!-- Nuevo Botón solicitado hacia Contacto con prellenado de Guía Gratis -->
+                        <div class="pt-3 border-t border-evoluta-cyan/20">
+                            <button id="btnFreeGuide" onclick="requestFreeGuide()" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-evoluta-amber to-amber-400 hover:from-amber-400 hover:to-yellow-300 text-evoluta-abyss font-display font-extrabold text-xs sm:text-sm tracking-wide shadow-amber-glow transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5 cursor-pointer text-center">
+                                <i class="fa-solid fa-file-arrow-down text-base flex-shrink-0"></i>
+                                <span id="btnFreeGuideText">Recibe GRATIS una guía de cómo aplicar el Protocolo de Ignición</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PANEL DE RESULTADOS DETALLADOS EN PORCENTAJES -->
+                <div id="detailedPercentagesPanel" class="rounded-3xl tech-glass border border-evoluta-cyan/35 p-6 sm:p-10 shadow-2xl space-y-8 transition-all">
+                    
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                        <div>
+                            <span class="text-xs font-display font-bold uppercase tracking-widest text-evoluta-cyan">
+                                <i class="fa-solid fa-chart-simple mr-1.5"></i> Desglose Cuantitativo en Porcentajes
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-display font-extrabold text-white mt-1">
+                                Proyección de los Indicadores IBS sobre las Áreas Principales
+                            </h3>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="px-4 py-1.5 rounded-full bg-evoluta-cyan/10 border border-evoluta-cyan/30 text-xs font-mono text-evoluta-cyan" id="summaryBalancePercent">
+                                Equilibrio Matriz: 65%
+                            </span>
+                            <span class="px-4 py-1.5 rounded-full bg-evoluta-amber/15 border border-evoluta-amber/40 text-xs font-mono text-evoluta-amber" id="summaryIbsPercent">
+                                Bloqueo IBS: 35%
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="text-xs font-display font-bold uppercase tracking-widest text-white flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-evoluta-cyan"></span>
+                            1. Rendimiento por Área Principal de la Matriz IRIS (%)
+                        </h4>
+                        <div id="fiveAreasPercentGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                            <!-- Renderizado dinámico -->
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 pt-2">
+                        <h4 class="text-xs font-display font-bold uppercase tracking-widest text-evoluta-muted flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-evoluta-amber"></span>
+                            2. Nivel de Fricción Detectado por Dimensión IBS (%)
+                        </h4>
+                        <div id="sixDimensionsPercentGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Renderizado dinámico -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             5. EL SISTEMA EVOLUTA: RED + IMÁN + IRIS
+        ================================================================== -->
+        <section id="el-sistema" class="py-24 px-4 sm:px-6 lg:px-8 bg-evoluta-deep/70 border-y border-white/5 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto space-y-20">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-5 reveal">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-evoluta-abyss border border-evoluta-cyan/40 flex items-center justify-center shadow-cyan-glow">
+                        <svg class="w-9 h-9" viewBox="0 0 40 40" fill="none">
+                            <path d="M10 13V22C10 27.5228 14.4772 32 20 32C25.5228 32 30 27.5228 30 22V13" stroke="url(#evolutaCyanGrad)" stroke-width="4.5" stroke-linecap="round" filter="url(#cyanGlowFilter)"/>
+                            <circle cx="10" cy="7.5" r="2.6" fill="#00D2FF" filter="url(#cyanGlowFilter)"/>
+                            <circle cx="30" cy="7.5" r="2.6" fill="#00D2FF" filter="url(#cyanGlowFilter)"/>
+                        </svg>
+                    </div>
+                    <span class="block text-xs font-display font-bold uppercase tracking-[0.25em] text-evoluta-cyan">
+                        Ingeniería de Resultados Sostenibles
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold text-white">
+                        La Arquitectura <span class="text-gradient-cyan">RED · IMÁN · IRIS</span>
+                    </h2>
+                    <p class="text-evoluta-muted text-sm sm:text-base leading-relaxed">
+                        Un sistema cerrado de transformación personal: primero defines tu estructura, luego activas el ciclo de ejecución y finalmente mides tu progreso con datos reales.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal">
+                    
+                    <div class="rounded-3xl tech-glass tech-glass-hover p-8 flex flex-col justify-between space-y-8">
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-evoluta-cyan/15 text-evoluta-cyan font-display font-bold text-xs tracking-widest uppercase">
+                                    01 · Estructura Base
+                                </span>
+                                <i class="fa-solid fa-diagram-project text-evoluta-cyan text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-display font-extrabold text-white">Método RED</h3>
+                            <p class="text-sm text-evoluta-muted leading-relaxed">
+                                Transforma la confusión y la parálisis en claridad estratégica y un plan accionable.
+                            </p>
+                            <div class="space-y-4 pt-2">
+                                <div class="p-3.5 rounded-xl bg-evoluta-abyss/70 border border-white/5">
+                                    <span class="font-display font-bold text-evoluta-cyan text-sm">R — Raíz</span>
+                                    <p class="text-xs text-slate-300 mt-1">Autoconocimiento profundo: valores, fortalezas, creencias y patrones.</p>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-evoluta-abyss/70 border border-white/5">
+                                    <span class="font-display font-bold text-evoluta-cyan text-sm">E — Elección</span>
+                                    <p class="text-xs text-slate-300 mt-1">Decisión consciente mediante matrices de criterios y priorización.</p>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-evoluta-abyss/70 border border-white/5">
+                                    <span class="font-display font-bold text-evoluta-cyan text-sm">D — Dirección</span>
+                                    <p class="text-xs text-slate-300 mt-1">Ruta crítica, planificación por bloques y objetivos ejecutables.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-white/10 text-xs font-display font-semibold text-evoluta-amber">
+                            Confusión → Claridad y Dirección
+                        </div>
+                    </div>
+
+                    <div class="rounded-3xl tech-glass tech-glass-hover p-8 flex flex-col justify-between space-y-8 border-evoluta-cyan/40">
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-evoluta-cobalt/30 text-evoluta-cyan font-display font-bold text-xs tracking-widest uppercase">
+                                    02 · Motor Continuo
+                                </span>
+                                <i class="fa-solid fa-magnet text-evoluta-cyan text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-display font-extrabold text-white">Sistema IMÁN</h3>
+                            <p class="text-sm text-evoluta-muted leading-relaxed">
+                                El bucle iterativo que convierte intenciones en hábitos sostenibles y errores en aprendizaje.
+                            </p>
+                            <div class="space-y-3 pt-2">
+                                <div class="p-3 rounded-xl bg-evoluta-abyss/70 border border-white/5 flex items-start gap-3">
+                                    <span class="font-display font-extrabold text-evoluta-cyan">I</span>
+                                    <div>
+                                        <span class="font-display font-bold text-white text-xs uppercase">Imaginar</span>
+                                        <p class="text-xs text-slate-300">Diseñar con propósito el escenario futuro deseado.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-evoluta-abyss/70 border border-white/5 flex items-start gap-3">
+                                    <span class="font-display font-extrabold text-evoluta-cyan">M</span>
+                                    <div>
+                                        <span class="font-display font-bold text-white text-xs uppercase">Movilizar</span>
+                                        <p class="text-xs text-slate-300">Iniciar la ejecución inmediata venciendo la fricción.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-evoluta-abyss/70 border border-white/5 flex items-start gap-3">
+                                    <span class="font-display font-extrabold text-evoluta-cyan">A</span>
+                                    <div>
+                                        <span class="font-display font-bold text-white text-xs uppercase">Aprendizaje</span>
+                                        <p class="text-xs text-slate-300">Contrastar resultados reales frente a los esperados.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 rounded-xl bg-evoluta-abyss/70 border border-white/5 flex items-start gap-3">
+                                    <span class="font-display font-extrabold text-evoluta-cyan">N</span>
+                                    <div>
+                                        <span class="font-display font-bold text-white text-xs uppercase">Neuroajustar</span>
+                                        <p class="text-xs text-slate-300">Recalibrar estrategias y creencias sin abandonar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-white/10 text-xs font-display font-semibold text-evoluta-amber">
+                            Estancamiento → Evolución Continua
+                        </div>
+                    </div>
+
+                    <div class="rounded-3xl tech-glass tech-glass-hover p-8 flex flex-col justify-between space-y-6">
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full bg-evoluta-amber/15 text-evoluta-amber font-display font-bold text-xs tracking-widest uppercase">
+                                    03 · Medición Real
+                                </span>
+                                <i class="fa-solid fa-chart-line text-evoluta-cyan text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-display font-extrabold text-white">Sistema IRIS</h3>
+                            <p class="text-sm text-evoluta-muted leading-relaxed">
+                                La evolución deja de ser subjetiva y se vuelve observable mediante indicadores precisos:
+                            </p>
+
+                            <div class="p-4 rounded-2xl bg-evoluta-abyss border border-evoluta-cyan/30 space-y-4">
+                                <div class="flex items-center justify-between text-[11px] font-mono text-evoluta-cyan">
+                                    <span>IRIS TELEMETRY v2.6</span>
+                                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVO</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="p-3 rounded-xl bg-evoluta-slate/60 border border-white/5">
+                                        <span class="text-[10px] font-display uppercase text-evoluta-muted block">IBS · Bloqueo</span>
+                                        <span class="text-lg font-display font-extrabold text-emerald-400">-42%</span>
+                                        <span class="text-[10px] text-slate-400 block">Fricción reducida</span>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-evoluta-slate/60 border border-white/5">
+                                        <span class="text-[10px] font-display uppercase text-evoluta-muted block">IEV · Energía</span>
+                                        <span class="text-lg font-display font-extrabold text-evoluta-cyan">88/100</span>
+                                        <span class="text-[10px] text-slate-400 block">Vitalidad óptima</span>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-evoluta-slate/60 border border-white/5">
+                                        <span class="text-[10px] font-display uppercase text-evoluta-muted block">PB · Progreso</span>
+                                        <span class="text-lg font-display font-extrabold text-white">+3.4x</span>
+                                        <span class="text-[10px] text-slate-400 block">Velocidad de logro</span>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-evoluta-slate/60 border border-white/5">
+                                        <span class="text-[10px] font-display uppercase text-evoluta-muted block">IRB · Resiliencia</span>
+                                        <span class="text-lg font-display font-extrabold text-evoluta-amber">92%</span>
+                                        <span class="text-[10px] text-slate-400 block">Neuroajuste activo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-white/10 text-xs font-display font-semibold text-evoluta-amber">
+                            Percepción → Datos Observables
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-6 sm:p-8 rounded-3xl tech-glass border border-white/10 reveal">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
+                        <div class="space-y-1.5">
+                            <i class="fa-solid fa-crosshairs text-evoluta-cyan text-lg"></i>
+                            <h4 class="font-display font-bold text-xs uppercase tracking-wider text-white">Claridad</h4>
+                            <p class="text-xs text-evoluta-muted">Específica y accionable</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <i class="fa-solid fa-arrow-trend-up text-evoluta-cyan text-lg"></i>
+                            <h4 class="font-display font-bold text-xs uppercase tracking-wider text-white">Crecimiento</h4>
+                            <p class="text-xs text-evoluta-muted">Vida y progreso real</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <i class="fa-solid fa-bolt text-evoluta-cyan text-lg"></i>
+                            <h4 class="font-display font-bold text-xs uppercase tracking-wider text-white">Acción</h4>
+                            <p class="text-xs text-evoluta-muted">Energía y activación</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <i class="fa-solid fa-shield-halved text-evoluta-cyan text-lg"></i>
+                            <h4 class="font-display font-bold text-xs uppercase tracking-wider text-white">Profesionalidad</h4>
+                            <p class="text-xs text-evoluta-muted">Ciencia y estabilidad</p>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1 space-y-1.5">
+                            <i class="fa-solid fa-spa text-evoluta-cyan text-lg"></i>
+                            <h4 class="font-display font-bold text-xs uppercase tracking-wider text-white">Equilibrio</h4>
+                            <p class="text-xs text-evoluta-muted">Naturalidad sostenible</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             6. ECOSISTEMA Y HOJA DE RUTA
+        ================================================================== -->
+        <section id="ecosistema" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-tech-grid">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4 reveal">
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.25em] text-evoluta-amber">
+                        Hoja de Ruta de Implementación
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-display font-bold text-white">
+                        El Ecosistema <span class="text-evoluta-cyan">EVOLUTA</span>
+                    </h2>
+                    <p class="text-evoluta-muted text-sm sm:text-base">
+                        Desde el autoaprendizaje guiado hasta la inteligencia artificial aplicada a tu evolución diaria. Escala a tu propio ritmo.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 reveal">
+                    
+                    <div class="rounded-2xl tech-glass tech-glass-hover p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-3">
+                            <span class="text-xs font-mono text-evoluta-cyan">01 / EDITORIAL</span>
+                            <h3 class="text-lg font-display font-bold text-white">Ebooks & Workbooks</h3>
+                            <p class="text-xs text-evoluta-muted leading-relaxed">
+                                Autoaprendizaje estructurado con el Libro Maestro de Ruta y cuadernos de ejercicios RED + IMÁN.
+                            </p>
+                        </div>
+                        <a href="#contacto" class="w-full py-2.5 rounded-xl border border-white/15 hover:border-evoluta-cyan text-xs font-display font-bold uppercase tracking-wider text-white transition-all text-center">
+                            Explorar Guías
+                        </a>
+                    </div>
+
+                    <div class="rounded-2xl tech-glass tech-glass-hover p-6 flex flex-col justify-between space-y-6 border-evoluta-cyan shadow-cyan-glow relative">
+                        <span class="absolute -top-3 right-4 px-3 py-0.5 rounded-full bg-evoluta-cyan text-evoluta-abyss font-display font-extrabold text-[10px] uppercase tracking-wider">
+                            Acceso Directo
+                        </span>
+                        <div class="space-y-3">
+                            <span class="text-xs font-mono text-evoluta-cyan">02 / LABORATORIO</span>
+                            <h3 class="text-lg font-display font-bold text-white">RED LAB</h3>
+                            <p class="text-xs text-slate-200 leading-relaxed">
+                                Espacio de experimentación y validación práctica donde diseñas, pruebas y ajustas tu sistema real.
+                            </p>
+                        </div>
+                        <a href="#contacto" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss text-xs font-display font-bold uppercase tracking-wider shadow-cyan-glow transition-all text-center">
+                            Entrar a RED LAB
+                        </a>
+                    </div>
+
+                    <div class="rounded-2xl tech-glass tech-glass-hover p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-3">
+                            <span class="text-xs font-mono text-evoluta-cyan">03 / ACOMPAÑAMIENTO</span>
+                            <h3 class="text-lg font-display font-bold text-white">Mentoría 1:1 y Grupal</h3>
+                            <p class="text-xs text-evoluta-muted leading-relaxed">
+                                Diagnóstico profundo personalizado y aprendizaje colaborativo para desbloquear cuellos de botella complejos.
+                            </p>
+                        </div>
+                        <a href="#contacto" class="w-full py-2.5 rounded-xl border border-white/15 hover:border-evoluta-cyan text-xs font-display font-bold uppercase tracking-wider text-white transition-all text-center">
+                            Solicitar Plaza
+                        </a>
+                    </div>
+
+                    <div class="rounded-2xl tech-glass tech-glass-hover p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-3">
+                            <span class="text-xs font-mono text-evoluta-cyan">04 / IDENTIDAD</span>
+                            <h3 class="text-lg font-display font-bold text-white">Comunidad EVOLUTA</h3>
+                            <p class="text-xs text-evoluta-muted leading-relaxed">
+                                No eres un cliente, eres un miembro activo. Intercambio de experiencias, retos sistémicos y mejora compartida.
+                            </p>
+                        </div>
+                        <a href="#contacto" class="w-full py-2.5 rounded-xl border border-white/15 hover:border-evoluta-cyan text-xs font-display font-bold uppercase tracking-wider text-white transition-all text-center">
+                            Ser Miembro
+                        </a>
+                    </div>
+
+                    <div class="rounded-2xl tech-glass tech-glass-hover p-6 flex flex-col justify-between space-y-6 border-evoluta-amber/30">
+                        <div class="space-y-3">
+                            <span class="text-xs font-mono text-evoluta-amber">05 / PLATAFORMA TECH</span>
+                            <h3 class="text-lg font-display font-bold text-white">App EVOLUTA & IRIS AI</h3>
+                            <p class="text-xs text-evoluta-muted leading-relaxed">
+                                Dashboards en tiempo real, seguimiento automatizado de métricas IBS/IEV e inteligencia artificial de apoyo.
+                            </p>
+                        </div>
+                        <a href="#contacto" class="w-full py-2.5 rounded-xl bg-evoluta-amber/15 border border-evoluta-amber/40 hover:bg-evoluta-amber hover:text-evoluta-abyss text-xs font-display font-bold uppercase tracking-wider text-evoluta-amber transition-all text-center">
+                            Acceso Anticipado
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             7. MANIFIESTO EVOLUTA
+        ================================================================== -->
+        <section id="manifiesto" class="py-24 px-4 sm:px-6 lg:px-8 bg-evoluta-deep border-t border-evoluta-cyan/20 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto space-y-16 relative z-10">
+                
+                <div class="text-center space-y-4 reveal">
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.25em] text-evoluta-cyan">
+                        Manifiesto EVOLUTA
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-display font-extrabold text-white">
+                        La comunidad de quienes deciden <span class="text-gradient-cyan">evolucionar conscientemente</span>
+                    </h2>
+                    <p class="text-evoluta-muted max-w-2xl mx-auto text-base sm:text-lg font-light">
+                        "No competimos con otras personas. Competimos con la versión de nosotros mismos que existía ayer."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                    <div class="p-7 rounded-2xl tech-glass border border-white/10 space-y-2.5">
+                        <span class="text-xs font-mono text-evoluta-cyan">PRINCIPIO 01</span>
+                        <h3 class="text-lg font-display font-bold text-white">Todo resultado es consecuencia de un sistema</h3>
+                        <p class="text-sm text-evoluta-muted leading-relaxed">
+                            Los éxitos y bloqueos no ocurren por azar. Detrás de cada resultado hay una estructura visible o invisible. Cuando cambia el sistema, cambian los resultados.
+                        </p>
+                    </div>
+
+                    <div class="p-7 rounded-2xl tech-glass border border-white/10 space-y-2.5">
+                        <span class="text-xs font-mono text-evoluta-cyan">PRINCIPIO 02</span>
+                        <h3 class="text-lg font-display font-bold text-white">La claridad precede a la acción</h3>
+                        <p class="text-sm text-evoluta-muted leading-relaxed">
+                            Es difícil avanzar cuando no sabemos quiénes somos o hacia dónde vamos. La claridad elimina la fricción antes de dar el primer paso.
+                        </p>
+                    </div>
+
+                    <div class="p-7 rounded-2xl tech-glass border border-white/10 space-y-2.5">
+                        <span class="text-xs font-mono text-evoluta-cyan">PRINCIPIO 03</span>
+                        <h3 class="text-lg font-display font-bold text-white">Toda experiencia contiene aprendizaje</h3>
+                        <p class="text-sm text-evoluta-muted leading-relaxed">
+                            Los errores no son el final del camino, son datos. Observamos, reflexionamos y neuroajustamos nuestra estrategia sin culpa.
+                        </p>
+                    </div>
+
+                    <div class="p-7 rounded-2xl tech-glass border border-white/10 space-y-2.5">
+                        <span class="text-xs font-mono text-evoluta-amber">PRINCIPIO 04</span>
+                        <h3 class="text-lg font-display font-bold text-white">Tu mejor versión no es un destino, es un sistema</h3>
+                        <p class="text-sm text-evoluta-muted leading-relaxed">
+                            Evolucionar no es un acontecimiento aislado. Es una práctica diaria, una decisión consciente y un diseño intencional.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Banner de Cierre Cinematográfico -->
+                <div class="rounded-3xl p-8 sm:p-14 text-center space-y-8 relative overflow-hidden border border-evoluta-cyan/40 shadow-cyan-glow reveal" style="background: radial-gradient(circle at 50% 20%, rgba(0, 210, 255, 0.22) 0%, rgba(245, 166, 35, 0.12) 45%, rgba(6, 13, 23, 0.96) 90%);">
+                    <div class="flex flex-col items-center space-y-3">
+                        <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none">
+                            <path d="M44 43C39.5 49.5 31.5 52.5 23.5 50.5C14.5 48.2 9.5 39 11.8 30C13.5 23.2 19 18.2 25.5 16.8" stroke="url(#evolutaSilverGrad)" stroke-width="5.5" stroke-linecap="round"/>
+                            <path d="M13 35.5C21 35.5 33 32.5 46 17" stroke="url(#evolutaCyanGrad)" stroke-width="6" stroke-linecap="round" filter="url(#cyanGlowFilter)"/>
+                            <path d="M36 15.5H48.5V28" stroke="url(#evolutaCyanGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#cyanGlowFilter)"/>
+                            <circle cx="31" cy="14" r="4" fill="#FFFFFF" filter="url(#cyanGlowFilter)"/>
+                        </svg>
+                        <div class="font-display font-extrabold text-2xl sm:text-3xl tracking-[0.28em] text-white">
+                            EVOLUT<span class="text-evoluta-cyan">A</span>
+                        </div>
+                        <span class="text-xs font-display tracking-[0.25em] text-evoluta-cyan uppercase">
+                            Evolución desde tu sistema
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 max-w-2xl mx-auto">
+                        <h3 class="text-2xl sm:text-4xl font-display font-bold text-white">
+                            Tu siguiente nivel empieza ahora.
+                        </h3>
+                        <p class="text-sm sm:text-base text-slate-300">
+                            No empieza cuando tengas más ganas. Empieza cuando decides dar el paso y diseñar tu sistema.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#contacto" class="w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-extrabold text-sm uppercase tracking-wider shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all transform hover:-translate-y-0.5">
+                            Contactar con Asesoría
+                        </a>
+                        <a href="#diagnostico-ibs" class="w-full sm:w-auto px-8 py-4 rounded-full tech-glass border border-white/25 hover:border-evoluta-cyan text-white font-display font-bold text-sm uppercase tracking-wider transition-all">
+                            Realizar Diagnóstico IBS
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             8. SECCIÓN DE CONTACTO DESDE EL HEADER (CON PRELLENADO DE GUÍA GRATIS)
+        ================================================================== -->
+        <section id="contacto" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-evoluta-deep border-t border-white/5">
+            <div class="max-w-6xl mx-auto space-y-16">
+                
+                <div class="text-center space-y-4 reveal">
+                    <span class="text-xs font-display font-bold uppercase tracking-[0.25em] text-evoluta-cyan">
+                        Canal Directo & Envío de Guías
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-display font-extrabold text-white">
+                        Inicia tu <span class="text-gradient-cyan">Conversación Sistémica</span>
+                    </h2>
+                    <p class="text-evoluta-muted max-w-2xl mx-auto text-sm sm:text-base">
+                        Solicita tu <strong>guía gratuita de aplicación</strong> tras tu diagnóstico IBS o escríbenos directamente para resolver cualquier duda sobre el Método RED.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start reveal">
+                    
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="p-8 rounded-3xl tech-glass border border-evoluta-cyan/30 space-y-6">
+                            <h3 class="text-xl font-display font-bold text-white">Información de Contacto</h3>
+                            <p class="text-sm text-evoluta-muted leading-relaxed">
+                                Nuestro equipo operativo envía tu guía personalizada y responde consultas en un plazo máximo de 24 horas hábiles.
+                            </p>
+
+                            <div class="space-y-5 pt-2">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-base flex-shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-display uppercase tracking-wider text-evoluta-muted block">Correo Electrónico</span>
+                                        <a href="mailto:soporte@pineapplered.com" class="text-sm font-medium text-white hover:text-evoluta-cyan transition-colors">soporte@pineapplered.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-base flex-shrink-0">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-display uppercase tracking-wider text-evoluta-muted block">Ubicación Operativa</span>
+                                        <span class="text-sm font-medium text-white">Tenerife, Islas Canarias & Operación Global Remota</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-evoluta-cyan/10 border border-evoluta-cyan/30 flex items-center justify-center text-evoluta-cyan text-base flex-shrink-0">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-display uppercase tracking-wider text-evoluta-muted block">Horario de Soporte</span>
+                                        <span class="text-sm font-medium text-white">Lunes a Viernes · 09:00 - 18:00 (WET)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="contactCardBox" class="lg:col-span-7 rounded-3xl tech-glass border border-evoluta-cyan/40 p-8 sm:p-10 shadow-2xl relative overflow-hidden transition-all duration-500">
+                        <form id="contactForm" onsubmit="submitContactForm(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Tu Nombre *</label>
+                                    <input type="text" id="contactNameInput" required placeholder="Ej. Alex Rivera" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Correo Electrónico *</label>
+                                    <input type="email" id="contactEmailInput" required placeholder="tu@correo.com" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Área de Interés / Asunto *</label>
+                                <select id="contactSubjectSelect" required class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="guia_gratis">Recibir Guía GRATIS de Primera Victoria (Diagnóstico IBS)</option>
+                                    <option value="diagnostico">Resultado Diagnóstico IBS & Matriz IRIS</option>
+                                    <option value="redlab">Acceso a RED LAB</option>
+                                    <option value="mentoria">Mentoría Estratégica 1:1</option>
+                                    <option value="empresas">Consultoría y Procesos (B2B)</option>
+                                    <option value="otro">Otra consulta general</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Tu Mensaje *</label>
+                                <textarea id="contactMessageTextarea" required rows="4" placeholder="Cuéntanos sobre tus objetivos o dudas actuales..." class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-extrabold text-xs uppercase tracking-wider shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all cursor-pointer">
+                                Enviar Solicitud y Recibir Guía
+                            </button>
+                        </form>
+
+                        <div id="contactSuccessBox" class="hidden py-12 text-center space-y-4">
+                            <div class="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-400 text-3xl shadow-[0_0_20px_rgba(52,211,153,0.3)]">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="space-y-2">
+                                <h3 class="text-2xl font-display font-bold text-white">¡Solicitud Enviada con Éxito!</h3>
+                                <p class="text-sm text-evoluta-muted max-w-md mx-auto">
+                                    Hemos recibido tus datos correctamente. Te enviaremos tu guía gratuita y detalles del sistema EVOLUTA a tu correo electrónico.
+                                </p>
+                            </div>
+                            <button onclick="resetContactForm()" class="mt-4 px-6 py-2.5 rounded-full border border-white/20 hover:border-evoluta-cyan text-xs font-display font-bold uppercase tracking-wider text-white transition-all cursor-pointer">
+                                Enviar Otra Consulta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- =================================================================
+         9. FOOTER
+    ================================================================== -->
+    <footer class="bg-evoluta-abyss border-t border-white/10 pt-14 pb-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-10">
+            <div class="text-center pb-8 border-b border-white/10">
+                <p class="font-display font-bold text-xs sm:text-sm tracking-[0.35em] text-evoluta-cyan uppercase">
+                    CREA <span class="text-white/30 mx-2">/</span> PLANIFICA <span class="text-white/30 mx-2">/</span> ACTÚA <span class="text-white/30 mx-2">/</span> EVOLUCIONA
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <svg class="w-8 h-8" viewBox="0 0 64 64" fill="none">
+                        <path d="M44 43C39.5 49.5 31.5 52.5 23.5 50.5C14.5 48.2 9.5 39 11.8 30C13.5 23.2 19 18.2 25.5 16.8" stroke="url(#evolutaSilverGrad)" stroke-width="5.5" stroke-linecap="round"/>
+                        <path d="M13 35.5C21 35.5 33 32.5 46 17" stroke="url(#evolutaCyanGrad)" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M36 15.5H48.5V28" stroke="url(#evolutaCyanGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="31" cy="14" r="4" fill="#FFFFFF"/>
+                    </svg>
+                    <div>
+                        <span class="font-display font-bold tracking-[0.22em] text-white text-base block">EVOLUT<span class="text-evoluta-cyan">A</span></span>
+                        <span class="text-[10px] text-evoluta-muted uppercase tracking-widest">Diseña tu evolución</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-xs text-evoluta-muted">
+                    <a href="#el-bloqueo" class="hover:text-evoluta-cyan transition-colors">El Bloqueo</a>
+                    <a href="#diagnostico-ibs" class="hover:text-evoluta-cyan transition-colors">Diagnóstico IBS</a>
+                    <a href="#el-sistema" class="hover:text-evoluta-cyan transition-colors">Método RED · IMÁN · IRIS</a>
+                    <a href="#ecosistema" class="hover:text-evoluta-cyan transition-colors">Ecosistema</a>
+                    <a href="#manifiesto" class="hover:text-evoluta-cyan transition-colors">Manifiesto</a>
+                    <a href="#contacto" class="hover:text-evoluta-cyan transition-colors">Contacto</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full tech-glass border border-white/15 flex items-center justify-center text-evoluta-cyan hover:bg-evoluta-cyan hover:text-evoluta-abyss transition-all" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full tech-glass border border-white/15 flex items-center justify-center text-evoluta-cyan hover:bg-evoluta-cyan hover:text-evoluta-abyss transition-all" aria-label="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center text-xs text-slate-500 pt-4">
+                &copy; 2026 EVOLUTA · Sistema de Crecimiento Personal. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================================================================
+         LÓGICA JAVASCRIPT
+    ================================================================== -->
+    <script>
+        // 1. Menú Móvil
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuIcon.className = mobileMenu.classList.contains('hidden') ? 'fa-solid fa-bars' : 'fa-solid fa-xmark';
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars';
+            });
+        });
+
+        // 2. Selector de Áreas de Vida
+        const lifeAreasData = {
+            salud: {
+                tag: 'Área 01 · Energía Física y Vitalidad',
+                title: 'Salud: La base energética de tu sistema',
+                desc: 'Sin energía vital (IEV), cualquier plan colapsa. EVOLUTA diseña rutinas sostenibles de descanso, movimiento y nutrición integradas en tu agenda real, sin extremos insostenibles.'
+            },
+            mente: {
+                tag: 'Área 02 · Claridad Cognitiva y Enfoque',
+                title: 'Mente: Gestión emocional y neuroajuste',
+                desc: 'Elimina el ruido mental y la rumiación. Aplicamos herramientas de autoconocimiento (Raíz) para transformar la autocrítica en aprendizaje objetivo.'
+            },
+            profesion: {
+                tag: 'Área 03 · Impacto y Desarrollo Carrera',
+                title: 'Profesión: Ejecución estratégica sin dispersión',
+                desc: 'Convierte proyectos ambiciosos en rutas críticas claras (Dirección). Prioriza lo que genera alto impacto y elimina tareas que solo producen ocupación.'
+            },
+            finanzas: {
+                tag: 'Área 04 · Libertad y Estructura Económica',
+                title: 'Finanzas: Decisiones conscientes con datos',
+                desc: 'Aplica pensamiento de sistemas a tus recursos: métricas claras, presupuestos intencionales y toma de decisiones financieras libres de impulsividad.'
+            },
+            bienestar: {
+                tag: 'Área 05 · Propósito y Armonía Vital',
+                title: 'Bienestar: Coherencia entre quién eres y lo que haces',
+                desc: 'El verdadero progreso ocurre cuando tus acciones diarias honran tus valores fundamentales y tus relaciones personales.'
+            }
+        };
+
+        function selectLifeArea(areaKey) {
+            const data = lifeAreasData[areaKey];
+            document.getElementById('areaTag').textContent = data.tag;
+            document.getElementById('areaTitle').textContent = data.title;
+            document.getElementById('areaDesc').textContent = data.desc;
+
+            document.querySelectorAll('.area-btn').forEach(btn => {
+                if (btn.dataset.area === areaKey) {
+                    btn.classList.add('border-evoluta-cyan', 'shadow-cyan-glow');
+                    btn.classList.remove('border-white/10');
+                } else {
+                    btn.classList.remove('border-evoluta-cyan', 'shadow-cyan-glow');
+                    btn.classList.add('border-white/10');
+                }
+            });
+        }
+
+        // 3. Diagnóstico IBS por Sliders + Matriz IRIS + Botón Guía Gratis
+        const ibsDimensions = [
+            { 
+                id: 'raiz', code: '01', title: 'RAÍZ (IDENTIDAD)', areaTarget: 'Claridad', question: '¿Sientes dispersión o dudas sobre si tus metas reflejan lo que realmente valoras?', defaultVal: 4,
+                why: 'Tu bloqueo nace en la Raíz: intentas construir disciplina sobre objetivos que no están alineados con tu identidad ni tus valores reales.',
+                victory: 'Escribe hoy tus 3 valores innegociables y audita tu meta principal: si no conecta con al menos dos de ellos, rediseña el objetivo.',
+                guideTopic: 'la Auditoría de Valores y Raíz RED'
+            },
+            { 
+                id: 'eleccion', code: '02', title: 'ELECCIÓN (DECISIÓN)', areaTarget: 'Decisión', question: '¿Te quedas atrapado analizando opciones y postergas decidir con firmeza?', defaultVal: 5,
+                why: 'Sufres parálisis por análisis en el eje de Elección: mantener demasiadas puertas abiertas consume toda tu energía cognitiva antes de actuar.',
+                victory: 'Aplica la regla de descarte RED: elige una única prioridad para los próximos 14 días y pausa deliberadamente todas las demás alternativas.',
+                guideTopic: 'la Regla de Descarte RED de 14 Días'
+            },
+            { 
+                id: 'direccion', code: '03', title: 'DIRECCIÓN (PLAN)', areaTarget: 'Claridad', question: '¿Te abrumas al no tener una ruta paso a paso clara para ejecutar tus objetivos?', defaultVal: 4,
+                why: 'Tu fricción está en la Dirección: tienes visión clara pero careces de una ruta crítica dividida en bloques ejecutables.',
+                victory: 'Desglosa tu objetivo en 3 hitos semanales y define únicamente la primera acción física de 15 minutos para mañana a primera hora.',
+                guideTopic: 'el Desglose en 3 Hitos Semanales y Ruta Crítica'
+            },
+            { 
+                id: 'movilizacion', code: '04', title: 'MOVILIZACIÓN (ACCIÓN)', areaTarget: 'Acción', question: '¿Pospones el inicio de tus tareas esperando "sentirte motivado"?', defaultVal: 6,
+                why: 'Experimentas un bloqueo de Movilización: tu sistema depende del estado emocional en lugar de un disparador de inicio de baja fricción.',
+                victory: 'Usa el Protocolo de Ignición de 5 Minutos: comprométete a ejecutar la tarea durante solo 5 minutos sin exigirte terminarla.',
+                guideTopic: 'el Protocolo de Ignición de 5 Minutos'
+            },
+            { 
+                id: 'aprendizaje', code: '05', title: 'APRENDIZAJE (DATOS)', areaTarget: 'Aprendizaje', question: '¿Repites los mismos tropiezos porque no mides qué funcionó y qué falló?', defaultVal: 3,
+                why: 'Falta retroalimentación en el eje de Aprendizaje: avanzas en piloto automático sin contrastar resultados esperados frente a reales.',
+                victory: 'Agenda 10 minutos este domingo para responder dos preguntas IRIS: ¿Qué generó avance real esta semana? ¿Qué generó fricción?',
+                guideTopic: 'la Revisión Semanal de Telemetría IRIS'
+            },
+            { 
+                id: 'neuroajuste', code: '06', title: 'NEUROAJUSTE (ADAPTACIÓN)', areaTarget: 'Adaptabilidad', question: 'Cuando algo falla, ¿lo ves como fracaso personal en lugar de recalibrar?', defaultVal: 4,
+                why: 'Tu cuello de botella es el Neuroajuste: confundes un fallo técnico del proceso con una incapacidad personal.',
+                victory: 'Reformula tu último tropiezo como un dato de calibración: cambia una sola variable de tu rutina y vuelve a probar durante 7 días.',
+                guideTopic: 'el Protocolo de Recalibración y Neuroajuste de 7 Días'
+            }
+        ];
+
+        const matrixAxesConfig = [
+            { key: 'claridad', label: 'Claridad', phaseHint: 'Fase Raíz + Dirección' },
+            { key: 'decision', label: 'Decisión', phaseHint: 'Fase Elección' },
+            { key: 'accion', label: 'Acción', phaseHint: 'Fase Movilizar' },
+            { key: 'aprendizaje', label: 'Aprendizaje', phaseHint: 'Fase Análisis IRIS' },
+            { key: 'adaptabilidad', label: 'Adaptabilidad', phaseHint: 'Fase Neuroajuste' }
+        ];
+
+        let currentIbsValues = {};
+        let currentBottleneckDim = ibsDimensions[3]; // Por defecto Movilización
+        ibsDimensions.forEach(d => currentIbsValues[d.id] = d.defaultVal);
+
+        function renderIbsSliders() {
+            const container = document.getElementById('slidersContainer');
+            container.innerHTML = '';
+
+            ibsDimensions.forEach(dim => {
+                const val = currentIbsValues[dim.id];
+                const block = document.createElement('div');
+                block.className = 'space-y-2.5';
+                block.innerHTML = `
+                    <div class="flex items-center justify-between gap-2">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-display font-extrabold text-xs sm:text-sm tracking-wider text-white">
+                                    ${dim.code}. ${dim.title}
+                                </span>
+                                <span class="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-evoluta-cyan/10 text-evoluta-cyan border border-evoluta-cyan/20">
+                                    → Área: ${dim.areaTarget}
+                                </span>
+                            </div>
+                            <p class="text-xs text-evoluta-muted mt-0.5">${dim.question}</p>
+                        </div>
+                        <span id="badge-${dim.id}" class="flex-shrink-0 px-2.5 py-1 rounded-md bg-evoluta-cyan/15 border border-evoluta-cyan/40 font-mono font-bold text-xs text-evoluta-cyan">
+                            ${val} / 10
+                        </span>
+                    </div>
+                    <div class="relative flex items-center">
+                        <input type="range" min="1" max="10" step="1" value="${val}" id="slider-${dim.id}" class="evoluta-slider" aria-label="${dim.title}">
+                    </div>
+                `;
+                container.appendChild(block);
+
+                const sliderEl = block.querySelector(`#slider-${dim.id}`);
+                updateSliderTrackFill(sliderEl, val);
+
+                sliderEl.addEventListener('input', (e) => {
+                    const newVal = parseInt(e.target.value, 10);
+                    currentIbsValues[dim.id] = newVal;
+                    document.getElementById(`badge-${dim.id}`).textContent = `${newVal} / 10`;
+                    updateSliderTrackFill(sliderEl, newVal);
+                    updateSystemMatrixAndResults();
+                });
+            });
+        }
+
+        function updateSliderTrackFill(sliderEl, val) {
+            const percentage = ((val - 1) / 9) * 100;
+            sliderEl.style.background = `linear-gradient(to right, #00D2FF 0%, #00D2FF ${percentage}%, #13243B ${percentage}%, #13243B 100%)`;
+        }
+
+        function initRadarGrid() {
+            const gridLayer = document.getElementById('radarGridLayer');
+            const labelsLayer = document.getElementById('radarLabelsLayer');
+            const cx = 180, cy = 172, maxR = 105;
+            const levels = [0.25, 0.5, 0.75, 1.0];
+
+            let gridSvg = '';
+            levels.forEach(lvl => {
+                const r = maxR * lvl;
+                const pts = [];
+                for (let i = 0; i < 5; i++) {
+                    const angle = (-90 + i * 72) * (Math.PI / 180);
+                    const x = cx + r * Math.cos(angle);
+                    const y = cy + r * Math.sin(angle);
+                    pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+                }
+                gridSvg += `<polygon points="${pts.join(' ')}" fill="none" stroke="rgba(148, 163, 184, 0.16)" stroke-width="1" />`;
+            });
+
+            let labelsSvg = '';
+            matrixAxesConfig.forEach((axis, i) => {
+                const angle = (-90 + i * 72) * (Math.PI / 180);
+                const xEnd = cx + maxR * Math.cos(angle);
+                const yEnd = cy + maxR * Math.sin(angle);
+                gridSvg += `<line x1="${cx}" y1="${cy}" x2="${xEnd.toFixed(1)}" y2="${yEnd.toFixed(1)}" stroke="rgba(148, 163, 184, 0.18)" stroke-width="1" />`;
+
+                const labelR = maxR + 24;
+                const lx = cx + labelR * Math.cos(angle);
+                const ly = cy + labelR * Math.sin(angle);
+
+                let anchor = 'middle';
+                let dy = '0.35em';
+                if (i === 0) { dy = '-0.3em'; }
+                else if (i === 1) { anchor = 'start'; }
+                else if (i === 2) { anchor = 'start'; dy = '0.8em'; }
+                else if (i === 3) { anchor = 'end'; dy = '0.8em'; }
+                else if (i === 4) { anchor = 'end'; }
+
+                labelsSvg += `
+                    <text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" dy="${dy}" fill="#E2E8F0" font-family="Montserrat, sans-serif" font-size="12" font-weight="600">
+                        ${axis.label}
+                    </text>
+                `;
+            });
+
+            gridLayer.innerHTML = gridSvg;
+            labelsLayer.innerHTML = labelsSvg;
+        }
+
+        function updateSystemMatrixAndResults() {
+            const healthRaiz = 11 - currentIbsValues.raiz;
+            const healthEleccion = 11 - currentIbsValues.eleccion;
+            const healthDireccion = 11 - currentIbsValues.direccion;
+            const healthMovilizacion = 11 - currentIbsValues.movilizacion;
+            const healthAprendizaje = 11 - currentIbsValues.aprendizaje;
+            const healthNeuroajuste = 11 - currentIbsValues.neuroajuste;
+
+            const areaScores10 = {
+                claridad: Number(((healthRaiz + healthDireccion) / 2).toFixed(1)),
+                decision: healthEleccion,
+                accion: healthMovilizacion,
+                aprendizaje: healthAprendizaje,
+                adaptabilidad: healthNeuroajuste
+            };
+
+            const cx = 180, cy = 172, maxR = 105;
+            const polygonPoints = [];
+            let nodesSvg = '';
+
+            matrixAxesConfig.forEach((axis, i) => {
+                const score10 = areaScores10[axis.key];
+                const ratio = score10 / 10;
+                const angle = (-90 + i * 72) * (Math.PI / 180);
+                const px = cx + (maxR * ratio) * Math.cos(angle);
+                const py = cy + (maxR * ratio) * Math.sin(angle);
+                polygonPoints.push(`${px.toFixed(1)},${py.toFixed(1)}`);
+
+                nodesSvg += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="4.2" fill="#F5A623" stroke="#060D17" stroke-width="1.2" filter="url(#nodeAmberGlow)" />`;
+            });
+
+            const dataLayer = document.getElementById('radarDataLayer');
+            dataLayer.innerHTML = `
+                <polygon points="${polygonPoints.join(' ')}" fill="url(#radarAreaFill)" stroke="#00D2FF" stroke-width="2.4" stroke-linejoin="round"/>
+                ${nodesSvg}
+            `;
+
+            const areaValuesArray = Object.values(areaScores10);
+            const avgMatrix10 = areaValuesArray.reduce((acc, v) => acc + v, 0) / 5;
+            const matrixPercent = Math.round(avgMatrix10 * 10);
+
+            const ibsValuesArray = Object.values(currentIbsValues);
+            const avgIbs10 = ibsValuesArray.reduce((acc, v) => acc + v, 0) / 6;
+            const ibsPercent = Math.round(((avgIbs10 - 1) / 9) * 100);
+
+            document.getElementById('globalIndexScore').textContent = avgMatrix10.toFixed(1);
+            document.getElementById('globalIbsPercentBadge').textContent = `Fricción IBS: ${ibsPercent}%`;
+            document.getElementById('summaryBalancePercent').textContent = `Equilibrio Matriz: ${matrixPercent}%`;
+            document.getElementById('summaryIbsPercent').textContent = `Bloqueo IBS: ${ibsPercent}%`;
+
+            const statusEl = document.getElementById('systemStatusLabel');
+            if (avgMatrix10 >= 7.5) {
+                statusEl.textContent = 'Sistema Optimizado';
+                statusEl.className = 'font-display font-bold text-sm sm:text-base text-emerald-400';
+            } else if (avgMatrix10 >= 5.0) {
+                statusEl.textContent = 'Sistema en Expansión';
+                statusEl.className = 'font-display font-bold text-sm sm:text-base text-evoluta-amber';
+            } else {
+                statusEl.textContent = 'Sistema con Alta Fricción';
+                statusEl.className = 'font-display font-bold text-sm sm:text-base text-red-400';
+            }
+
+            // Identificar la dimensión IBS con mayor puntuación (mayor cuello de botella)
+            let highestDim = ibsDimensions[0];
+            let maxVal = -1;
+            ibsDimensions.forEach(dim => {
+                const val = currentIbsValues[dim.id];
+                if (val > maxVal) {
+                    maxVal = val;
+                    highestDim = dim;
+                }
+            });
+            currentBottleneckDim = highestDim;
+
+            // Actualizar textos de las tarjetas y del botón de Guía Gratis
+            document.getElementById('resWhyText').textContent = highestDim.why;
+            document.getElementById('resVictoryText').textContent = highestDim.victory;
+            document.getElementById('btnFreeGuideText').textContent = `Recibe GRATIS una guía de cómo aplicar ${highestDim.guideTopic}`;
+
+            const fiveAreasGrid = document.getElementById('fiveAreasPercentGrid');
+            fiveAreasGrid.innerHTML = '';
+            matrixAxesConfig.forEach(axis => {
+                const sc10 = areaScores10[axis.key];
+                const pct = Math.round(sc10 * 10);
+                fiveAreasGrid.insertAdjacentHTML('beforeend', `
+                    <div class="p-4 rounded-2xl bg-evoluta-abyss/85 border border-white/10 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display font-bold text-xs uppercase tracking-wider text-white">
+                                ${axis.label}
+                            </span>
+                            <span class="font-mono font-extrabold text-sm text-evoluta-cyan">${pct}%</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan rounded-full transition-all duration-300" style="width: ${pct}%;"></div>
+                        </div>
+                        <span class="block text-[11px] text-evoluta-muted">${axis.phaseHint} (${sc10}/10)</span>
+                    </div>
+                `);
+            });
+
+            const sixDimGrid = document.getElementById('sixDimensionsPercentGrid');
+            sixDimGrid.innerHTML = '';
+            ibsDimensions.forEach(dim => {
+                const rawVal = currentIbsValues[dim.id];
+                const frictionPct = Math.round(((rawVal - 1) / 9) * 100);
+                const isHigh = frictionPct >= 65;
+
+                sixDimGrid.insertAdjacentHTML('beforeend', `
+                    <div class="p-3.5 rounded-xl bg-evoluta-abyss/70 border border-white/5 space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-slate-300 font-medium">${dim.code}. ${dim.title.split(' ')[0]} <span class="text-evoluta-muted text-[10px]">(${dim.areaTarget})</span></span>
+                            <span class="font-mono font-bold ${isHigh ? 'text-evoluta-amber' : 'text-white'}">${frictionPct}% fricción</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full ${isHigh ? 'bg-evoluta-amber' : 'bg-evoluta-cyan'} rounded-full transition-all duration-300" style="width: ${frictionPct}%;"></div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        // Acción al pulsar el botón "Recibe GRATIS una guía..."
+        function requestFreeGuide() {
+            const contactSection = document.getElementById('contacto');
+            const subjectSelect = document.getElementById('contactSubjectSelect');
+            const messageTextarea = document.getElementById('contactMessageTextarea');
+            const contactCardBox = document.getElementById('contactCardBox');
+            const contactForm = document.getElementById('contactForm');
+            const contactSuccessBox = document.getElementById('contactSuccessBox');
+
+            // Asegurar que el formulario esté visible si ya se había enviado antes
+            contactSuccessBox.classList.add('hidden');
+            contactForm.classList.remove('hidden');
+
+            // Seleccionar opción de Guía Gratis y prellenar mensaje con el resultado exacto
+            subjectSelect.value = 'guia_gratis';
+            messageTextarea.value = `Hola equipo EVOLUTA, acabo de realizar mi Diagnóstico IBS.\n\nMi principal punto de bloqueo es: ${currentBottleneckDim.title} (Área: ${currentBottleneckDim.areaTarget}).\n\nMe gustaría recibir GRATIS la guía paso a paso sobre cómo aplicar ${currentBottleneckDim.guideTopic} (${currentBottleneckDim.victory}).`;
+
+            // Desplazar suavemente a la sección de contacto y resaltar tarjeta
+            contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            contactCardBox.classList.add('border-evoluta-amber', 'shadow-amber-glow');
+            setTimeout(() => {
+                contactCardBox.classList.remove('border-evoluta-amber', 'shadow-amber-glow');
+                document.getElementById('contactNameInput').focus();
+            }, 1200);
+        }
+
+        function resetSliders() {
+            ibsDimensions.forEach(dim => {
+                currentIbsValues[dim.id] = dim.defaultVal;
+                const slider = document.getElementById(`slider-${dim.id}`);
+                const badge = document.getElementById(`badge-${dim.id}`);
+                if (slider && badge) {
+                    slider.value = dim.defaultVal;
+                    badge.textContent = `${dim.defaultVal} / 10`;
+                    updateSliderTrackFill(slider, dim.defaultVal);
+                }
+            });
+            updateSystemMatrixAndResults();
+        }
+
+        function revealFullReport() {
+            const panel = document.getElementById('detailedPercentagesPanel');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            panel.classList.add('border-evoluta-cyan', 'shadow-cyan-glow');
+            setTimeout(() => { panel.classList.remove('shadow-cyan-glow'); }, 1400);
+        }
+
+        initRadarGrid();
+        renderIbsSliders();
+        updateSystemMatrixAndResults();
+
+        // 4. Formulario de Contacto
+        function submitContactForm(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').classList.add('hidden');
+            document.getElementById('contactSuccessBox').classList.remove('hidden');
+        }
+
+        function resetContactForm() {
+            const form = document.getElementById('contactForm');
+            const successBox = document.getElementById('contactSuccessBox');
+            form.reset();
+            successBox.classList.add('hidden');
+            form.classList.remove('hidden');
+        }
+
+        // 5. Animaciones al scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
