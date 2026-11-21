@@ -1055,7 +1055,7 @@
                                     </div>
                                     <div>
                                         <span class="text-xs font-display uppercase tracking-wider text-evoluta-muted block">Correo Electrónico</span>
-                                        <a href="mailto:soporte@pineapplered.com" class="text-sm font-medium text-white hover:text-evoluta-cyan transition-colors">soporte@pineapplered.com</a>
+                                        <a href="mailto:evolutared@gmail.com" class="text-sm font-medium text-white hover:text-evoluta-cyan transition-colors">evolutared@gmail.com</a>
                                     </div>
                                 </div>
 
@@ -1087,17 +1087,17 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div>
                                     <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Tu Nombre *</label>
-                                    <input type="text" id="contactNameInput" required placeholder="Ej. Alex Rivera" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                    <input type="text" id="contactNameInput" name="nombre" required placeholder="Ej. Alex Rivera" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Correo Electrónico *</label>
-                                    <input type="email" id="contactEmailInput" required placeholder="tu@correo.com" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                    <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2"> Correo Electronico *</label>
+                                    <input type="email" id="contactEmailInput" name="email" required placeholder="tu@correo.com" class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Área de Interés / Asunto *</label>
-                                <select id="contactSubjectSelect" required class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
+                                <select id="contactSubjectSelect" name="asunto" required class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors">
                                     <option value="" disabled selected>Selecciona una opción</option>
                                     <option value="guia_gratis">Recibir Guía GRATIS de Primera Victoria (Diagnóstico IBS)</option>
                                     <option value="diagnostico">Resultado Diagnóstico IBS & Matriz IRIS</option>
@@ -1110,7 +1110,7 @@
 
                             <div>
                                 <label class="block text-xs font-display uppercase tracking-wider text-evoluta-muted mb-2">Tu Mensaje *</label>
-                                <textarea id="contactMessageTextarea" required rows="4" placeholder="Cuéntanos sobre tus objetivos o dudas actuales..." class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors resize-none"></textarea>
+                                <textarea id="contactMessageTextarea" name="mensaje" required rows="4" placeholder="Cuéntanos sobre tus objetivos o dudas actuales..." class="w-full px-4 py-3.5 rounded-xl bg-evoluta-abyss border border-white/15 text-white text-sm focus:outline-none focus:border-evoluta-cyan transition-colors resize-none"></textarea>
                             </div>
 
                             <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-evoluta-cobalt to-evoluta-cyan text-evoluta-abyss font-display font-extrabold text-xs uppercase tracking-wider shadow-cyan-glow hover:shadow-cyan-glow-lg transition-all cursor-pointer">
@@ -1579,19 +1579,37 @@
         updateSystemMatrixAndResults();
 
         // 4. Formulario de Contacto
-        function submitContactForm(e) {
-            e.preventDefault();
-            document.getElementById('contactForm').classList.add('hidden');
-            document.getElementById('contactSuccessBox').classList.remove('hidden');
-        }
+function submitContactForm(e) {
+  e.preventDefault();
 
-        function resetContactForm() {
-            const form = document.getElementById('contactForm');
-            const successBox = document.getElementById('contactSuccessBox');
-            form.reset();
-            successBox.classList.add('hidden');
-            form.classList.remove('hidden');
-        }
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch('https://formspree.io/f/mqpqyznq', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  })
+    .then((response) => {
+      if (response.ok) {
+        document.getElementById('contactForm').classList.add('hidden');
+        document.getElementById('contactSuccessBox').classList.remove('hidden');
+      } else {
+        alert('Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo.');
+      }
+    })
+    .catch(() => {
+      alert('No se pudo conectar para enviar el mensaje. Revisa tu conexión e inténtalo de nuevo.');
+    });
+}
+
+function resetContactForm() {
+  const form = document.getElementById('contactForm');
+  const successBox = document.getElementById('contactSuccessBox');
+  form.reset();
+  successBox.classList.add('hidden');
+  form.classList.remove('hidden');
+}
 
         // 5. Animaciones al scroll
         const observer = new IntersectionObserver((entries) => {
